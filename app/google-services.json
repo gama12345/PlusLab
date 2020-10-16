@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "860372034475",
+    "firebase_url": "https://pluslab-b2fee.firebaseio.com",
+    "project_id": "pluslab-b2fee",
+    "storage_bucket": "pluslab-b2fee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860372034475:android:53e43a16d74952fcaf68ee",
+        "android_client_info": {
+          "package_name": "com.example.pluslab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860372034475-pl40efbedb8dmf6ised84mbd0n0uq748.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVlufz85KWFAecCrjjU3MUGrYqPnlSKbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860372034475-pl40efbedb8dmf6ised84mbd0n0uq748.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
