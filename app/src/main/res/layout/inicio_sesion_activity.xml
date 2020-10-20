@@ -6,90 +6,97 @@
     android:layout_height="match_parent"
     tools:context=".InicioSesionActivity">
 
-    <ImageView
-        android:id="@+id/logoInicioSesion"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tituloInicioSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
-
-    <TextView
-        android:id="@+id/tituloInicioSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
-        android:text="Inicia sesión"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@id/layoutEmailIniciaSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoInicioSesion" />
-
-    <LinearLayout
-        android:id="@+id/layoutEmailIniciaSesion"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/layoutContraseñaIniciaSesion"
-        app:layout_constraintTop_toBottomOf="@+id/tituloInicioSesion">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iconoEmail"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            <TextView
+                android:id="@+id/tituloInicioSesion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:text="Inicia sesión"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                app:layout_constraintTop_toBottomOf="@+id/logoInicioSesion" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/logoInicioSesion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_launcher_background" />
 
-    <LinearLayout
-        android:id="@+id/layoutContraseñaIniciaSesion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/button"
-        app:layout_constraintTop_toBottomOf="@id/layoutEmailIniciaSesion">
+            <LinearLayout
+                android:id="@+id/layoutEmailIniciaSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iconoContraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_launcher_background" />
+                <ImageView
+                    android:id="@+id/iconoEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
-        <EditText
-            android:id="@+id/contraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Aqui va tu correo..."
+                    android:inputType="textEmailAddress"
+                    android:textSize="22sp" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="100dp"
-        android:text="Entra ya"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutContraseñaIniciaSesion" />
+            <LinearLayout
+                android:id="@+id/layoutContraseñaIniciaSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iconoContraseña"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+
+                <EditText
+                    android:id="@+id/contraseña"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Aqui va tu contraseña..."
+                    android:inputType="textPassword"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/boton_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="150dp"
+                android:text="Entra ya" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
