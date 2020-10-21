@@ -3,7 +3,9 @@ package com.example.pluslab;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -53,8 +55,15 @@ public class InicioSesionActivity extends AppCompatActivity {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     if (document.get("contraseña").equals(password.getText().toString())) {
                                         pacienteLogeado = document.getReference();
-                                        Snackbar.make(innerView, "Hola " + document.get("nombre"), Snackbar.LENGTH_SHORT)
-                                                .setAction("Autenticado", null).show();
+                                        HelperSQLite helper = new HelperSQLite(InicioSesionActivity.this,"SQLite", null, 1);
+                                        SQLiteDatabase bd = helper.getWritableDatabase();
+                                        ContentValues registro = new ContentValues();
+                                        registro.put("correo_electronico", document.get("correo_electronico").toString().toString());
+                                        bd.insert("usuario", null, registro);
+                                        bd.close();
+                                        Intent intent = new Intent(InicioSesionActivity.this, MenuPrincipal.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        InicioSesionActivity.this.startActivity(intent);
                                     } else {
                                         Snackbar.make(innerView, "Email o contraseña incorrectos", Snackbar.LENGTH_LONG)
                                                 .setAction("Mensaje de error", null).show();

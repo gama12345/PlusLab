@@ -102,7 +102,7 @@ public class RegistrarPacienteActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(RegistrarPacienteActivity.this, MainActivity.class);
-            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             RegistrarPacienteActivity.this.startActivity(intent);
         }
     };
