@@ -55,27 +55,36 @@ public class RegistrarPacienteActivity extends AppCompatActivity {
                     if(Pattern.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@+[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})+$", email.getText().toString())){
                         if(Pattern.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%^&\\*]).{6,}$", contraseña.getText().toString())){
                             //Registro
-                            db.collection("pacientes").whereEqualTo("correo_electronico", email.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            db.collection("administrador").whereEqualTo("correo_electronico", email.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if(task.getResult().isEmpty()){
-                                        Map<String, Object> nvoPaciente = new HashMap<>();
-                                        nvoPaciente.put("nombre",nombre.getText().toString());
-                                        nvoPaciente.put("apellidos", apellidos.getText().toString());
-                                        nvoPaciente.put("celular", celular.getText().toString());
-                                        nvoPaciente.put("correo_electronico", email.getText().toString());
-                                        nvoPaciente.put("contraseña", contraseña.getText().toString());
-                                        nvoPaciente.put("direccion", direccion.getText().toString());
-                                        db.collection("pacientes").add(nvoPaciente).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    if(task.getResult().isEmpty()) {
+                                        db.collection("pacientes").whereEqualTo("correo_electronico", email.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Toast.makeText(innerView.getContext(), "Se han guardado tus datos. Ahora inicia sesión", Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(RegistrarPacienteActivity.this, MainActivity.class);
-                                                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                                                RegistrarPacienteActivity.this.startActivity(intent);
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.getResult().isEmpty()) {
+                                                    Map<String, Object> nvoPaciente = new HashMap<>();
+                                                    nvoPaciente.put("nombre", nombre.getText().toString());
+                                                    nvoPaciente.put("apellidos", apellidos.getText().toString());
+                                                    nvoPaciente.put("celular", celular.getText().toString());
+                                                    nvoPaciente.put("correo_electronico", email.getText().toString());
+                                                    nvoPaciente.put("contraseña", contraseña.getText().toString());
+                                                    nvoPaciente.put("direccion", direccion.getText().toString());
+                                                    db.collection("pacientes").add(nvoPaciente).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                        @Override
+                                                        public void onSuccess(DocumentReference documentReference) {
+                                                            Toast.makeText(innerView.getContext(), "Se han guardado tus datos. Ahora inicia sesión", Toast.LENGTH_LONG).show();
+                                                            Intent intent = new Intent(RegistrarPacienteActivity.this, MainActivity.class);
+                                                            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                                            RegistrarPacienteActivity.this.startActivity(intent);
+                                                        }
+                                                    });
+                                                } else {
+                                                    Toast.makeText(getApplicationContext(), "Correo electrónico no válido, use uno distinto", Toast.LENGTH_LONG).show();
+                                                }
                                             }
                                         });
-                                    }else{
+                                    } else {
                                         Toast.makeText(getApplicationContext(), "Correo electrónico no válido, use uno distinto", Toast.LENGTH_LONG).show();
                                     }
                                 }

@@ -1,11 +1,13 @@
 package com.example.pluslab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -15,7 +17,19 @@ public class MenuPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_principal_activity);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        setSupportActionBar(myToolbar);
+        agregarBtnAccion();
         configurarBtnFlotante();
+    }
+
+    void agregarBtnAccion(){
+        Button btnMisdatos = findViewById(R.id.btnMisdatos);
+        Button btnServicios = findViewById(R.id.btnServicios);
+        Button btnCitas = findViewById(R.id.btnCitas);
+        if(InicioSesionActivity.tipoUsuario.equals("Administrador")){
+            btnMisdatos.setOnClickListener(irDatosAdmin);
+        }
     }
 
     void configurarBtnFlotante(){
@@ -33,4 +47,22 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
     }
+
+    //ActionListeners
+    View.OnClickListener irDatosAdmin = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MenuPrincipal.this, MisdatosAdminActivity.class);
+            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            MenuPrincipal.this.startActivity(intent);
+        }
+    };
+    View.OnClickListener irDatosPaciente = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MenuPrincipal.this, MisdatosPacienteActivity.class);
+            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            MenuPrincipal.this.startActivity(intent);
+        }
+    };
 }

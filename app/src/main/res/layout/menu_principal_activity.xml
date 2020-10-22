@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MenuPrincipal">
 
+    <include
+        android:id="@+id/custom_toolbar"
+        layout="@layout/custom_toolbar"></include>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -38,22 +42,22 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btnMisdatos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:minHeight="100dp"
-                    android:text="Button" />
+                    android:text="Mis datos" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btnServicios"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:minHeight="100dp"
-                    android:text="Button" />
+                    android:text="Servicios" />
             </LinearLayout>
 
             <LinearLayout
@@ -62,22 +66,14 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/btnCitas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:minHeight="100dp"
-                    android:text="Button" />
+                    android:text="Citas" />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:minHeight="100dp"
-                    android:text="Button" />
             </LinearLayout>
 
         </LinearLayout>

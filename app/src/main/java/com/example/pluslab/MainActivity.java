@@ -12,7 +12,6 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,14 +34,32 @@ public class MainActivity extends AppCompatActivity {
             agregarBtnAccion();
         }else{
             emailUsuario = consulta.getString(0);
-            FirebaseFirestore.getInstance().collection("pacientes").whereEqualTo("correo_electronico",consulta.getString(0)).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            //Si es admin
+            FirebaseFirestore.getInstance().collection("administrador").whereEqualTo("correo_electronico",consulta.getString(0)).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                            InicioSesionActivity.pacienteLogeado = document.getReference();
+                    if(task.getResult().isEmpty()) {
+                        //Si es paciente
+                        FirebaseFirestore.getInstance().collection("pacientes").whereEqualTo("correo_electronico", emailUsuario).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    InicioSesionActivity.usuarioLogeado = document.getReference();
+                                    InicioSesionActivity.tipoUsuario = "Paciente";
+                                    Intent intent = new Intent(MainActivity.this, MenuPrincipal.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    MainActivity.this.startActivity(intent);
+                                }
+                            }
+                        });
+                    }else{
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            InicioSesionActivity.usuarioLogeado = document.getReference();
+                            InicioSesionActivity.tipoUsuario = "Administrador";
                             Intent intent = new Intent(MainActivity.this, MenuPrincipal.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             MainActivity.this.startActivity(intent);
+                        }
                     }
                 }
             });
