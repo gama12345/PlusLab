@@ -29,6 +29,8 @@ public class MenuPrincipal extends AppCompatActivity {
         Button btnCitas = findViewById(R.id.btnCitas);
         if(InicioSesionActivity.tipoUsuario.equals("Administrador")){
             btnMisdatos.setOnClickListener(irDatosAdmin);
+        }else{
+            btnMisdatos.setOnClickListener(irDatosPaciente);
         }
     }
 
