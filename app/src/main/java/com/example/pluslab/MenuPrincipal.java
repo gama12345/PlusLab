@@ -53,7 +53,6 @@ public class MenuPrincipal extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MenuPrincipal.this, MisdatosAdminActivity.class);
-            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
             MenuPrincipal.this.startActivity(intent);
         }
     };
@@ -61,7 +60,6 @@ public class MenuPrincipal extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MenuPrincipal.this, MisdatosPacienteActivity.class);
-            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
             MenuPrincipal.this.startActivity(intent);
         }
     };

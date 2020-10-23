@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Plus+Lab</string>
+    <string-array name="dias">
+        <item>Domingo</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+    </string-array>
 </resources>
