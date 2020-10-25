@@ -29,6 +29,7 @@ public class MenuPrincipal extends AppCompatActivity {
         Button btnCitas = findViewById(R.id.btnCitas);
         if(InicioSesionActivity.tipoUsuario.equals("Administrador")){
             btnMisdatos.setOnClickListener(irDatosAdmin);
+            btnServicios.setOnClickListener(irServiciosAdmin);
         }else{
             btnMisdatos.setOnClickListener(irDatosPaciente);
         }
@@ -55,6 +56,13 @@ public class MenuPrincipal extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MenuPrincipal.this, MisdatosAdminActivity.class);
+            MenuPrincipal.this.startActivity(intent);
+        }
+    };
+    View.OnClickListener irServiciosAdmin = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MenuPrincipal.this, ServiciosAdminActivity.class);
             MenuPrincipal.this.startActivity(intent);
         }
     };
