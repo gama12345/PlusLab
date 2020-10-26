@@ -9,4 +9,15 @@
         <item>Viernes</item>
         <item>Sábado</item>
     </string-array>
+    <string-array name="categorias_analisis">
+        <item>Hematología</item>
+        <item>Bioquímica</item>
+        <item>Coagulación</item>
+        <item>Bacteriología</item>
+        <item>Inmunología</item>
+        <item>Endocrinología</item>
+        <item>Alergías</item>
+        <item>Toxicología</item>
+        <item>Heces</item>
+    </string-array>
 </resources>

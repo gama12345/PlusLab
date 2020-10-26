@@ -9,12 +9,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -50,6 +53,7 @@ public class ServiciosAdminActivity extends AppCompatActivity {
         refreshLayout = findViewById(R.id.swipeRefreshLayout);
         refreshLayout.setOnRefreshListener(refreshAction);
         leerDatosServicios();
+        configurarBtnFlotante();
     }
 
     void leerDatosServicios(){
@@ -92,5 +96,17 @@ public class ServiciosAdminActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    void configurarBtnFlotante(){
+        FloatingActionButton nuevo = findViewById(R.id.btnAgregarServicio);
+        nuevo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ServiciosAdminActivity.this, ServiciosRegistrarActivity.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                ServiciosAdminActivity.this.startActivity(intent);
+            }
+        });
     }
 }
