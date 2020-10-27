@@ -32,6 +32,7 @@ public class MenuPrincipal extends AppCompatActivity {
             btnServicios.setOnClickListener(irServiciosAdmin);
         }else{
             btnMisdatos.setOnClickListener(irDatosPaciente);
+            btnServicios.setOnClickListener(irServiciosPaciente);
         }
     }
 
@@ -70,6 +71,13 @@ public class MenuPrincipal extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MenuPrincipal.this, MisdatosPacienteActivity.class);
+            MenuPrincipal.this.startActivity(intent);
+        }
+    };
+    View.OnClickListener irServiciosPaciente = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MenuPrincipal.this, ServiciosPacienteActivity.class);
             MenuPrincipal.this.startActivity(intent);
         }
     };

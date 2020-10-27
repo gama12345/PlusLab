@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ServiciosEditarActivity"></activity>
+        <activity android:name=".ServiciosDetallesActivity"></activity>
+        <activity android:name=".ServiciosPacienteActivity" />
+        <activity android:name=".ServiciosEditarActivity" />
         <activity android:name=".ServiciosRegistrarActivity" />
         <activity android:name=".ServiciosAdminActivity" />
         <activity android:name=".MisdatosEditarPacienteActivity" />

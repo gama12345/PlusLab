@@ -39,9 +39,15 @@ public class ServiciosAdaptador extends RecyclerView.Adapter<ServiciosAdaptador.
         holder.nombreServicio.setText(servicioActual.getNombre());
         holder.categoriaServicio.setText("Categoria: "+servicioActual.getCategoria());
         holder.costoServicio.setText("Costo: "+servicioActual.getCosto());
+
         View.OnClickListener click = new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(actividad, ServiciosEditarActivity.class);
+                Intent intent;
+                if(InicioSesionActivity.tipoUsuario.equals("Administrador")) {
+                    intent = new Intent(actividad, ServiciosEditarActivity.class);
+                }else{
+                    intent = new Intent(actividad, ServiciosDetallesActivity.class);
+                }
                 intent.putExtra("nombreServicio", servicioActual.getNombre());
                 intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 actividad.startActivity(intent);
@@ -50,6 +56,7 @@ public class ServiciosAdaptador extends RecyclerView.Adapter<ServiciosAdaptador.
         holder.nombreServicio.setOnClickListener(click);
         holder.categoriaServicio.setOnClickListener(click);
         holder.costoServicio.setOnClickListener(click);
+
     }
 
     @Override
