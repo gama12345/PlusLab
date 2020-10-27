@@ -2,6 +2,7 @@ package com.example.pluslab;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +35,21 @@ public class ServiciosAdaptador extends RecyclerView.Adapter<ServiciosAdaptador.
 
     @Override
     public void onBindViewHolder(@NonNull ServiciosViewHolder holder, int position) {
-        Servicio servicioActual = servicios.get(position);
-
-        Log.d("Holaaaaaaaaa", ""+servicios.size());
+        final Servicio servicioActual = servicios.get(position);
         holder.nombreServicio.setText(servicioActual.getNombre());
         holder.categoriaServicio.setText("Categoria: "+servicioActual.getCategoria());
         holder.costoServicio.setText("Costo: "+servicioActual.getCosto());
+        View.OnClickListener click = new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(actividad, ServiciosEditarActivity.class);
+                intent.putExtra("nombreServicio", servicioActual.getNombre());
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                actividad.startActivity(intent);
+            }
+        };
+        holder.nombreServicio.setOnClickListener(click);
+        holder.categoriaServicio.setOnClickListener(click);
+        holder.costoServicio.setOnClickListener(click);
     }
 
     @Override
