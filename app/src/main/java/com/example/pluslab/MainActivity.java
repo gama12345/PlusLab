@@ -7,14 +7,22 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     static String emailUsuario = "";
@@ -30,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor consulta = bd.query("usuario",email,
                 null,null,null,null,null);
 
-        actualizar
+        actualizarEdoCitas();
         if(!consulta.moveToFirst()) {
             agregarBtnAccion();
         }else{
@@ -71,6 +79,37 @@ public class MainActivity extends AppCompatActivity {
         Button btnRegistro = findViewById(R.id.btn_registrarse);
         btnLogin.setOnClickListener(login);
         btnRegistro.setOnClickListener(registro);
+    }
+
+    void actualizarEdoCitas(){
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar calendario = Calendar.getInstance();
+        calendario.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
+        Date today = null;
+        try {
+            today = formato.parse(formato.format(calendario.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("citas").whereEqualTo("fecha", formato.format(calendario.getTime())).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    document.getReference().update("estado", "próxima");
+                    document.getReference().update("prioridad", "1");
+                }
+                FirebaseFirestore.getInstance().collection("citas").whereLessThan("fecha", formato.format(calendario.getTime())).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            document.getReference().update("estado", "no atendida");
+                            document.getReference().update("prioridad", "6");
+                        }
+                    }
+                });
+            }
+        });
     }
 
     //ActionListeners
