@@ -19,10 +19,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -33,8 +36,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class CitasRegistrarActivity extends AppCompatActivity {
@@ -126,6 +131,7 @@ public class CitasRegistrarActivity extends AppCompatActivity {
     View.OnClickListener guardar = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            final View innerView = view;
             //Validando datos...
             try{
                 SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -137,8 +143,38 @@ public class CitasRegistrarActivity extends AppCompatActivity {
                     fechaFormatoDb = formato.format(calendario.getTime());
                 }
                 if (today.compareTo(formato.parse(fechaFormatoDb)) < 0) {
-                    Snackbar.make(view, "Fecha correcta", Snackbar.LENGTH_LONG)
-                            .setAction("Mensaje de error", null).show();
+                    //Validar hora
+                    final Spinner horaCita = findViewById(R.id.input_horaCita);
+                    FirebaseFirestore.getInstance().collection("citas").whereEqualTo("hora",horaCita.getSelectedItem().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.getResult().isEmpty()){
+                                Spinner spinnerServicio = findViewById(R.id.input_servicioCita);
+                                EditText acompañante = findViewById(R.id.input_acompañanteCita);
+                                Map<String, Object> nvaCita = new HashMap<>();
+                                nvaCita.put("paciente", emailPaciente);
+                                nvaCita.put("servicio", spinnerServicio.getSelectedItem().toString());
+                                nvaCita.put("fecha", fechaFormatoDb);
+                                nvaCita.put("hora", horaCita.getSelectedItem().toString());
+                                nvaCita.put("acompañante", acompañante.getText().toString());
+                                nvaCita.put("estado", "en agenda");
+                                nvaCita.put("prioridad", "2");
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("citas").add(nvaCita).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Toast.makeText(innerView.getContext(), "Cita registrada", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(CitasRegistrarActivity.this, CitasPacienteActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        CitasRegistrarActivity.this.startActivity(intent);
+                                    }
+                                });
+                            }else{
+                                Snackbar.make(innerView, "Este horario no se encuentra disponible en "+fechaFormatoDb, Snackbar.LENGTH_LONG)
+                                        .setAction("Mensaje de error", null).show();
+                            }
+                        }
+                    });
                 }else{
                     Snackbar.make(view, "Fecha incorrecta, agende una cita en una fecha posterior", Snackbar.LENGTH_LONG)
                             .setAction("Mensaje de error", null).show();
