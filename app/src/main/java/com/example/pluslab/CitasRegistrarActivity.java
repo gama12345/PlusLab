@@ -145,7 +145,7 @@ public class CitasRegistrarActivity extends AppCompatActivity {
                 if (today.compareTo(formato.parse(fechaFormatoDb)) < 0) {
                     //Validar hora
                     final Spinner horaCita = findViewById(R.id.input_horaCita);
-                    FirebaseFirestore.getInstance().collection("citas").whereEqualTo("hora",horaCita.getSelectedItem().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    FirebaseFirestore.getInstance().collection("citas").whereEqualTo("fecha", fechaFormatoDb).whereEqualTo("hora",horaCita.getSelectedItem().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.getResult().isEmpty()){

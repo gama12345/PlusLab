@@ -2,8 +2,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/input_pacienteCita"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CitasEditarActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <EditText
+                android:id="@+id/input_pacienteCitaEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Paciente..."
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/spinner_servicioCitaEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/input_fechaCitaEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Fecha..."
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/spinner_horaCitaEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/input_acompañanteCitaEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:hint="Acompañante..."
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/input_estadoCitaEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Estado..."
+                android:inputType="textPersonName" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_guardarCitaEditar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Guardar cambios" />
+
+                <Button
+                    android:id="@+id/btn_cancelarCita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancelar" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/custom_toolbar"
+        layout="@layout/custom_toolbar"></include>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

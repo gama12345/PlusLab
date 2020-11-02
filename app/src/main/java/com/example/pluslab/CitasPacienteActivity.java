@@ -60,7 +60,7 @@ public class CitasPacienteActivity extends AppCompatActivity {
 
     void leerDatosCitas(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("citas").orderBy("prioridad").whereEqualTo("paciente", MainActivity.emailUsuario).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("citas").orderBy("prioridad").orderBy("fecha").whereEqualTo("paciente", MainActivity.emailUsuario).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 citas = new ArrayList<Cita>();

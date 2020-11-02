@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor consulta = bd.query("usuario",email,
                 null,null,null,null,null);
 
+        actualizar
         if(!consulta.moveToFirst()) {
             agregarBtnAccion();
         }else{
