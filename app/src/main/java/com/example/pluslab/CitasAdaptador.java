@@ -53,18 +53,22 @@ public class CitasAdaptador extends RecyclerView.Adapter<CitasAdaptador.CitasVie
                        View.OnClickListener click = new View.OnClickListener() {
                            public void onClick(View v) {
                                Intent intent;
-                               if(InicioSesionActivity.tipoUsuario.equals("Administrador") || !citaActual.getEstado().equals("en agenda")) {
-                                   intent = new Intent(actividad, CitasEditarActivity.class);
+                               if(InicioSesionActivity.tipoUsuario.equals("Administrador") || (!citaActual.getEstado().equals("en agenda"))) {
+                                   intent = new Intent(actividad, CitasDetallesActivity.class);
                                }else{
                                    intent = new Intent(actividad, CitasEditarActivity.class);
                                }
+                               intent.putExtra("pacienteCita", citaActual.getPaciente());
+                               intent.putExtra("servicioCita", citaActual.getServicio());
                                intent.putExtra("fechaCita", citaActual.getFecha());
                                intent.putExtra("horaCita", citaActual.getHora());
+                               intent.putExtra("acompañanteCita", citaActual.getAcompañante());
+                               intent.putExtra("estadoCita", citaActual.getEstado());
                                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                                actividad.startActivity(intent);
                            }
                        };
-                       if (!citaActual.getEstado().equals("cancelada")) {
+                       if (!citaActual.getEstado().equals("cancelada") && !citaActual.getEstado().equals("no atendida")) {
                            holder.cardView.setOnClickListener(click);
                        }
                    }

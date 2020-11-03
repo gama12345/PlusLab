@@ -8,15 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class MenuPrincipal extends AppCompatActivity {
 
@@ -40,8 +33,8 @@ public class MenuPrincipal extends AppCompatActivity {
         }else{
             btnMisdatos.setOnClickListener(irDatosPaciente);
             btnServicios.setOnClickListener(irServiciosPaciente);
-            btnCitas.setOnClickListener(irCitasPaciente);
         }
+        btnCitas.setOnClickListener(irCitas);
     }
 
     void configurarBtnFlotante(){
@@ -89,10 +82,10 @@ public class MenuPrincipal extends AppCompatActivity {
             MenuPrincipal.this.startActivity(intent);
         }
     };
-    View.OnClickListener irCitasPaciente = new View.OnClickListener() {
+    View.OnClickListener irCitas = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(MenuPrincipal.this, CitasPacienteActivity.class);
+            Intent intent = new Intent(MenuPrincipal.this, CitasActivity.class);
             MenuPrincipal.this.startActivity(intent);
 
         }

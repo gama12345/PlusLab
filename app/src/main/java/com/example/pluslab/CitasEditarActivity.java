@@ -12,7 +12,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -87,7 +86,6 @@ public class CitasEditarActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 EditText nombre = findViewById(R.id.input_pacienteCitaEditar);
                 nombre.setText(task.getResult().get("nombre").toString()+" "+task.getResult().get("apellidos").toString());
-                //emailPaciente = task.getResult().get("correo_electronico").toString();
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("administrador").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -235,7 +233,7 @@ public class CitasEditarActivity extends AppCompatActivity {
                                             document.getReference().update(nvaCita);
                                         }
                                         Toast.makeText(innerView.getContext(), "Se ha actualizado su cita programda el "+fechaCita+" a las "+horaCita, Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(CitasEditarActivity.this, CitasPacienteActivity.class);
+                                        Intent intent = new Intent(CitasEditarActivity.this, CitasActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         CitasEditarActivity.this.startActivity(intent);
                                     }
@@ -273,7 +271,7 @@ public class CitasEditarActivity extends AppCompatActivity {
                                         document.getReference().update("prioridad", "4");
                                     }
                                     Toast.makeText(innerView.getContext(), "Se ha cancelado su cita programda el "+fechaCita+" a las "+horaCita, Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(CitasEditarActivity.this, CitasPacienteActivity.class);
+                                    Intent intent = new Intent(CitasEditarActivity.this, CitasActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     CitasEditarActivity.this.startActivity(intent);
                                 }
@@ -294,7 +292,7 @@ public class CitasEditarActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(CitasEditarActivity.this, CitasPacienteActivity.class);
+                Intent intent = new Intent(CitasEditarActivity.this, CitasActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();

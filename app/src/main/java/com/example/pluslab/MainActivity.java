@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void actualizarEdoCitas(){
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar calendario = Calendar.getInstance();
+        final SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        final Calendar calendario = Calendar.getInstance();
         calendario.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
         Date today = null;
         try {

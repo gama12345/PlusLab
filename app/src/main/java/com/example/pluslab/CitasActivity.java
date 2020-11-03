@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,12 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
-public class CitasPacienteActivity extends AppCompatActivity {
+public class CitasActivity extends AppCompatActivity {
         static Activity currentActivity;
         static ArrayList<Cita> citas;
         static RecyclerView recyclerView;
@@ -35,13 +31,22 @@ public class CitasPacienteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.citas_paciente_activity);
+        if(InicioSesionActivity.tipoUsuario.equals("Paciente")) {
+            setContentView(R.layout.citas_paciente_activity);
+        }else{
+            setContentView(R.layout.citas_admin_activity);
+        }
 
         currentActivity = this;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Mis citas");
+        if(InicioSesionActivity.tipoUsuario.equals("Paciente")) {
+            getSupportActionBar().setTitle("Mis citas");
+            configurarBtnFlotante();
+        }else{
+            getSupportActionBar().setTitle("Citas registradas");
+        }
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,28 +60,47 @@ public class CitasPacienteActivity extends AppCompatActivity {
         refreshLayout = findViewById(R.id.swipeRefreshLayoutCitas);
         refreshLayout.setOnRefreshListener(refreshAction);
         leerDatosCitas();
-        configurarBtnFlotante();
     }
 
     void leerDatosCitas(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("citas").orderBy("prioridad").orderBy("fecha").whereEqualTo("paciente", MainActivity.emailUsuario).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                citas = new ArrayList<Cita>();
-                for (QueryDocumentSnapshot cita : task.getResult()) {
-                    citas.add(new Cita(cita.get("paciente").toString(),
-                            cita.get("servicio").toString(),
-                            cita.get("fecha").toString(),
-                            cita.get("hora").toString(),
-                            cita.get("acompañante").toString(),
-                            cita.get("estado").toString(),
-                            cita.get("prioridad").toString()));
+        if(InicioSesionActivity.tipoUsuario.equals("Paciente")) {
+            db.collection("citas").orderBy("prioridad").orderBy("fecha").whereEqualTo("paciente", MainActivity.emailUsuario).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    citas = new ArrayList<Cita>();
+                    for (QueryDocumentSnapshot cita : task.getResult()) {
+                        citas.add(new Cita(cita.get("paciente").toString(),
+                                cita.get("servicio").toString(),
+                                cita.get("fecha").toString(),
+                                cita.get("hora").toString(),
+                                cita.get("acompañante").toString(),
+                                cita.get("estado").toString(),
+                                cita.get("prioridad").toString()));
+                    }
+                    CitasAdaptador adaptador = new CitasAdaptador(citas, currentActivity);
+                    recyclerView.setAdapter(adaptador);
                 }
-                CitasAdaptador adaptador = new CitasAdaptador(citas, currentActivity);
-                recyclerView.setAdapter(adaptador);
-            }
-        });
+            });
+        }else{
+            db.collection("citas").orderBy("prioridad").orderBy("fecha").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    citas = new ArrayList<Cita>();
+                    for (QueryDocumentSnapshot cita : task.getResult()) {
+                        citas.add(new Cita(cita.get("paciente").toString(),
+                                cita.get("servicio").toString(),
+                                cita.get("fecha").toString(),
+                                cita.get("hora").toString(),
+                                cita.get("acompañante").toString(),
+                                cita.get("estado").toString(),
+                                cita.get("prioridad").toString()));
+                    }
+                    CitasAdaptador adaptador = new CitasAdaptador(citas, currentActivity);
+                    recyclerView.setAdapter(adaptador);
+                }
+            });
+        }
     }
 
     SwipeRefreshLayout.OnRefreshListener refreshAction = new SwipeRefreshLayout.OnRefreshListener() {
@@ -92,9 +116,9 @@ public class CitasPacienteActivity extends AppCompatActivity {
         nuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CitasPacienteActivity.this, CitasRegistrarActivity.class);
+                Intent intent = new Intent(CitasActivity.this, CitasRegistrarActivity.class);
                 intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                CitasPacienteActivity.this.startActivity(intent);
+                CitasActivity.this.startActivity(intent);
             }
         });
     }
@@ -102,7 +126,7 @@ public class CitasPacienteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(CitasPacienteActivity.this, MenuPrincipal.class);
+                Intent intent = new Intent(CitasActivity.this, MenuPrincipal.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();

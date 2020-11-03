@@ -8,7 +8,6 @@ import androidx.fragment.app.DialogFragment;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +17,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -164,7 +161,7 @@ public class CitasRegistrarActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Toast.makeText(innerView.getContext(), "Cita registrada", Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(CitasRegistrarActivity.this, CitasPacienteActivity.class);
+                                        Intent intent = new Intent(CitasRegistrarActivity.this, CitasActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         CitasRegistrarActivity.this.startActivity(intent);
                                     }
@@ -187,7 +184,7 @@ public class CitasRegistrarActivity extends AppCompatActivity {
     View.OnClickListener cancelar = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(CitasRegistrarActivity.this, CitasPacienteActivity.class);
+            Intent intent = new Intent(CitasRegistrarActivity.this, CitasActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             CitasRegistrarActivity.this.startActivity(intent);
         }

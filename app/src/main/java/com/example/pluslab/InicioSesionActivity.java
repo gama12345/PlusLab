@@ -82,6 +82,7 @@ public class InicioSesionActivity extends AppCompatActivity {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     if (document.get("contraseña").equals(password.getText().toString())) {
                                         usuarioLogeado = document.getReference();
+                                        MainActivity.emailUsuario = document.get("correo_electronico").toString();
                                         tipoUsuario = "Paciente";
                                         HelperSQLite helper = new HelperSQLite(InicioSesionActivity.this,"SQLite", null, 1);
                                         SQLiteDatabase bd = helper.getWritableDatabase();
