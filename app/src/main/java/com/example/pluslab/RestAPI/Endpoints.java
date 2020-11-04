@@ -14,8 +14,6 @@ public interface Endpoints {
     @POST(ConstantesAPI.KEY_POST_ID_TOKEN)
     Call<DatosUsuarioRequest> registrarTokenID(@Field("token") String token, @Field("email") String email);
 
-    /*
-    @GET(ConstantesAPI.TOKEN_PUBLICA_PERCANCE)
-    Call<Respuesta> tokenPercance(@Path("miToken") String miToken);
-     */
+    @GET(ConstantesAPI.TOKEN_ANALISIS_NOTIFICACION)
+    Call<DatosUsuarioRequest> enviarNotificacion(@Path("miToken") String miToken);
 }

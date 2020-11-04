@@ -3,10 +3,14 @@ package com.example.pluslab;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,6 +19,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pluslab.RestAPI.Adaptador.AdapterRestAPI;
+import com.example.pluslab.RestAPI.Endpoints;
+import com.example.pluslab.RestAPI.Modelo.DatosUsuarioRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -116,6 +123,7 @@ public class CitasDetallesActivity extends AppCompatActivity {
                             prior = "3";
                         }else if(estadosCita.getSelectedItem().toString().equals("concluida")){
                             prior = "5";
+                            enviarNotificacion();
                         }
                         task.getResult().getDocuments().get(0).getReference().update("prioridad", prior);
 
@@ -136,6 +144,23 @@ public class CitasDetallesActivity extends AppCompatActivity {
             CitasDetallesActivity.this.startActivity(intent);
         }
     };
+
+    public void enviarNotificacion(){
+        AdapterRestAPI adapterRestAPI = new AdapterRestAPI();
+        Endpoints endpoints = adapterRestAPI.establecerConexionRestAPI();
+        Call<DatosUsuarioRequest> usuarioResponseCall = endpoints.enviarNotificacion(InicioSesionActivity.tokenUsuario);
+        usuarioResponseCall.enqueue(new Callback<DatosUsuarioRequest>() {
+            @Override
+            public void onResponse(Call<DatosUsuarioRequest> call, Response<DatosUsuarioRequest> response) {
+                DatosUsuarioRequest respuesta = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<DatosUsuarioRequest> call, Throwable t) {
+
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

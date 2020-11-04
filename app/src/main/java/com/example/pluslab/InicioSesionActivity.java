@@ -34,7 +34,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class InicioSesionActivity extends AppCompatActivity {
     FirebaseFirestore db;
     static DocumentReference usuarioLogeado;
-    static String tipoUsuario;
+    static String tipoUsuario, tokenUsuario;
     static Context myContext;
 
     @Override
@@ -133,7 +133,7 @@ public class InicioSesionActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<String> task) {
                 final String miToken = task.getResult().toString();
-                Toast.makeText(currentActivity, "Toke: "+miToken, Toast.LENGTH_LONG).show();
+                tokenUsuario = miToken;
                 FirebaseFirestore.getInstance().collection("tokens").whereEqualTo("token", task.getResult()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
