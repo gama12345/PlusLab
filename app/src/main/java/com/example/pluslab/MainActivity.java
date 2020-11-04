@@ -3,6 +3,8 @@ package com.example.pluslab;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,11 +28,13 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     static String emailUsuario = "";
+    static Context currentActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        currentActivity = this;
         //Si un usuario esta logeado ya no pedimos sus datos
         HelperSQLite helper = new HelperSQLite(MainActivity.this,"SQLite", null, 1);
         SQLiteDatabase bd = helper.getWritableDatabase();
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     MainActivity.this.startActivity(intent);
                                 }
+                                InicioSesionActivity.registraToken(currentActivity, task.getResult().getDocuments().get(0).get("correo_electronico").toString());
                             }
                         });
                     }else{
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             MainActivity.this.startActivity(intent);
                         }
+                        InicioSesionActivity.registraToken(currentActivity, task.getResult().getDocuments().get(0).get("correo_electronico").toString());
                     }
                 }
             });
