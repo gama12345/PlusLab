@@ -25,6 +25,7 @@ import com.example.pluslab.RestAPI.Modelo.DatosUsuarioRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class CitasDetallesActivity extends AppCompatActivity {
                             prior = "3";
                         }else if(estadosCita.getSelectedItem().toString().equals("concluida")){
                             prior = "5";
-                            enviarNotificacion();
+                            enviarNotificacion(task.getResult().getDocuments().get(0).get("paciente").toString());
                         }
                         task.getResult().getDocuments().get(0).getReference().update("prioridad", prior);
 
@@ -145,19 +146,28 @@ public class CitasDetallesActivity extends AppCompatActivity {
         }
     };
 
-    public void enviarNotificacion(){
-        AdapterRestAPI adapterRestAPI = new AdapterRestAPI();
-        Endpoints endpoints = adapterRestAPI.establecerConexionRestAPI();
-        Call<DatosUsuarioRequest> usuarioResponseCall = endpoints.enviarNotificacion(InicioSesionActivity.tokenUsuario);
-        usuarioResponseCall.enqueue(new Callback<DatosUsuarioRequest>() {
+    public void enviarNotificacion(String email){
+        FirebaseFirestore.getInstance().collection("tokens").whereEqualTo("usuario", email).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onResponse(Call<DatosUsuarioRequest> call, Response<DatosUsuarioRequest> response) {
-                DatosUsuarioRequest respuesta = response.body();
-            }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(QueryDocumentSnapshot document : task.getResult()) {
+                    AdapterRestAPI adapterRestAPI = new AdapterRestAPI();
+                    Endpoints endpoints = adapterRestAPI.establecerConexionRestAPI();
+                    Call<DatosUsuarioRequest> usuarioResponseCall = endpoints.enviarNotificacion(document.get("token").toString());
+                    usuarioResponseCall.enqueue(new Callback<DatosUsuarioRequest>() {
+                        @Override
+                        public void onResponse(Call<DatosUsuarioRequest> call, Response<DatosUsuarioRequest> response) {
+                            DatosUsuarioRequest respuesta = response.body();
+                            Log.d("MSG....EXITO", response.toString());
+                        }
 
-            @Override
-            public void onFailure(Call<DatosUsuarioRequest> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<DatosUsuarioRequest> call, Throwable t) {
+                            Log.d("MSG....ERROR", t.toString());
 
+                        }
+                    });
+                }
             }
         });
     }
