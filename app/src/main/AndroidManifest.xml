@@ -23,7 +23,9 @@
         <activity android:name=".MisdatosPacienteActivity" />
         <activity android:name=".MisdatosAdminActivity" />
         <activity android:name=".MenuPrincipal" />
-        <activity android:name=".RegistrarPacienteActivity" />
+        <activity
+            android:name=".RegistrarPacienteActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".InicioSesionActivity" />
         <activity
             android:name=".MainActivity"

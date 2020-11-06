@@ -10,59 +10,58 @@
         android:id="@+id/custom_toolbar"
         layout="@layout/custom_toolbar"></include>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:clickable="true"
-        app:backgroundTint="#774CAF50"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_lock_power_off" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="fill_vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="25dp"
+                android:layout_weight="1"
+                android:gravity="bottom|center_horizontal"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnMisdatos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:minHeight="100dp"
-                    android:text="Mis datos" />
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/btnmisdatos"
+                    android:minWidth="120dp"
+                    android:minHeight="120dp"
+                    android:textAlignment="center" />
 
                 <Button
                     android:id="@+id/btnServicios"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:minHeight="100dp"
-                    android:text="Servicios" />
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btnservicios"
+                    android:minWidth="120dp"
+                    android:minHeight="120dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|top"
                 android:orientation="horizontal">
 
                 <Button
@@ -70,10 +69,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:minHeight="100dp"
-                    android:text="Citas" />
+                    android:background="@drawable/btncitas"
+                    android:minWidth="100dp"
+                    android:minHeight="120dp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.01"
+                    android:clickable="true"
+                    android:elevation="10dp"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    app:maxImageSize="35dp"
+                    app:pressedTranslationZ="15dp"
+                    app:srcCompat="@drawable/ic_logout"
+                    tools:layout_editor_absoluteY="215dp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -8,7 +8,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,19 +23,27 @@
             <TextView
                 android:id="@+id/tituloInicioSesion"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
-                android:text="Inicia sesión"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.3"
+                android:text="INICIA SESIÓN"
                 android:textAlignment="center"
-                android:textSize="40sp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
                 app:layout_constraintTop_toBottomOf="@+id/logoInicioSesion" />
 
             <ImageView
                 android:id="@+id/logoInicioSesion"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:adjustViewBounds="true"
+                android:maxHeight="200dp"
+                app:srcCompat="@drawable/icon_login" />
 
             <LinearLayout
                 android:id="@+id/layoutEmailIniciaSesion"
@@ -44,19 +56,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    android:layout_weight="0.5"
+                    app:srcCompat="@drawable/ic_email" />
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Aqui va tu correo..."
                     android:inputType="textEmailAddress"
-                    android:textSize="22sp" />
+                    android:singleLine="true"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -72,19 +86,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    android:layout_weight="0.5"
+                    app:srcCompat="@drawable/ic_password" />
 
                 <EditText
                     android:id="@+id/contraseña"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Aqui va tu contraseña..."
                     android:inputType="textPassword"
-                    android:textSize="22sp" />
+                    android:singleLine="true"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -92,9 +108,16 @@
                 android:id="@+id/boton_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="150dp"
-                android:text="Entra ya" />
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rounded_shape"
+                android:elevation="5dp"
+                android:text="Entra ya"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

@@ -19,6 +19,7 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.menu_principal_activity);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Menú Principal");
         agregarBtnAccion();
         configurarBtnFlotante();
     }
