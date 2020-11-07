@@ -25,6 +25,15 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:minWidth="40dp"
+                    android:minHeight="40dp"
+                    app:srcCompat="@drawable/ic_services" />
+
                 <EditText
                     android:id="@+id/input_editar_nombreServicio"
                     android:layout_width="wrap_content"
@@ -42,6 +51,15 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:minWidth="40dp"
+                    android:minHeight="40dp"
+                    app:srcCompat="@drawable/ic_category" />
+
                 <Spinner
                     android:id="@+id/input_editar_categoriaServicio"
                     android:layout_width="wrap_content"
@@ -55,6 +73,15 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:minWidth="40dp"
+                    android:minHeight="40dp"
+                    app:srcCompat="@drawable/ic_money" />
 
                 <EditText
                     android:id="@+id/input_editar_costoServicio"
@@ -72,6 +99,15 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:minWidth="40dp"
+                    android:minHeight="40dp"
+                    app:srcCompat="@drawable/ic_description" />
 
                 <EditText
                     android:id="@+id/input_editar_descripcionServicio"
@@ -91,6 +127,15 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:minWidth="40dp"
+                    android:minHeight="40dp"
+                    app:srcCompat="@drawable/ic_rules" />
+
                 <EditText
                     android:id="@+id/input_editar_indicacionesServicio"
                     android:layout_width="wrap_content"
@@ -105,7 +150,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="50dp"
                 android:orientation="horizontal">
 
@@ -113,15 +160,25 @@
                     android:id="@+id/btnGuardarEditarServicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:text="Guardar" />
+                    android:background="@drawable/rounded_shape"
+                    android:text="Guardar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnEliminarServicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:text="Eliminar" />
+                    android:background="@drawable/rounded_shape"
+                    android:text="Eliminar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

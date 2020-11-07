@@ -17,22 +17,29 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:clickable="true"
-        app:backgroundTint="#774CAF50"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:hoveredFocusedTranslationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:maxImageSize="35dp"
+        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_toolbar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/servicios_recyclerView"
-            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:scrollbars="vertical">
 
         </androidx.recyclerview.widget.RecyclerView>
 

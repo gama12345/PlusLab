@@ -170,15 +170,25 @@
                     android:id="@+id/btnRegistrarCita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:text="Agendar" />
+                    android:background="@drawable/rounded_shape"
+                    android:text="Agendar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnCancelarRegistroCita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:text="Cancelar" />
+                    android:background="@drawable/rounded_shape"
+                    android:text="Cancelar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
